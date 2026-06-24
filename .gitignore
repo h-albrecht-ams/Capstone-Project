@@ -30,4 +30,4 @@ dbt_packages/
 logs/
 
 # Large/local data
-data
+data/
