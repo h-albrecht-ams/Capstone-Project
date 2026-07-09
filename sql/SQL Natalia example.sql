@@ -241,3 +241,91 @@ GROUP BY origin, destination, origin_country
 HAVING COUNT(DISTINCT year) < 4
 ORDER BY origin_country, active_years;
 
+-- new conditions: 12 months of data in each period and present in all periods
+SELECT COUNT(*) as qualifying_routes
+FROM (
+    SELECT origin, destination, origin_country
+    FROM group2.cargo_master
+    WHERE cargo IS NOT NULL
+    AND origin IN (
+        'FRANKFURT/MAIN airport',
+        'PARIS-CHARLES DE GAULLE airport',
+        'ADOLFO SUAREZ MADRID-BARAJAS airport',
+        'AMSTERDAM/SCHIPHOL airport'
+    )
+    GROUP BY origin, destination, origin_country
+    HAVING 
+        COUNT(CASE WHEN year BETWEEN 2017 AND 2019 
+              AND cargo IS NOT NULL THEN 1 END) >= 12
+        AND COUNT(CASE WHEN year IN (2020, 2021) 
+              AND cargo IS NOT NULL THEN 1 END) >= 12
+        AND COUNT(CASE WHEN year BETWEEN 2022 AND 2024 
+              AND cargo IS NOT NULL THEN 1 END) >= 12
+) sub;
+
+
+-- Check breakdown by airport
+SELECT origin, COUNT(DISTINCT destination) as qualifying_routes
+FROM (
+    SELECT origin, destination, origin_country
+    FROM group2.passengers_master
+    WHERE passengers IS NOT NULL
+    AND origin IN (
+        'FRANKFURT/MAIN airport',
+        'PARIS-CHARLES DE GAULLE airport',
+        'ADOLFO SUAREZ MADRID-BARAJAS airport',
+        'AMSTERDAM/SCHIPHOL airport'
+    )
+    GROUP BY origin, destination, origin_country
+    HAVING 
+        COUNT(CASE WHEN year BETWEEN 2017 AND 2019 
+              AND passengers IS NOT NULL THEN 1 END) >= 12
+        AND COUNT(CASE WHEN year IN (2020, 2021) 
+              AND passengers IS NOT NULL THEN 1 END) >= 12
+        AND COUNT(CASE WHEN year BETWEEN 2022 AND 2024 
+              AND passengers IS NOT NULL THEN 1 END) >= 12
+) sub
+GROUP BY origin
+ORDER BY origin;
+
+SELECT origin, COUNT(DISTINCT destination) as routes
+FROM group2.passengers_core
+GROUP BY origin
+ORDER BY origin;
+
+SELECT *  FROM cargo_master WHERE DESTINATION_COUNTRY IS NULL;
+
+SELECT 
+    CASE 
+        WHEN year BETWEEN 2017 AND 2019 THEN 'Baseline'
+        WHEN year IN (2020, 2021) THEN 'COVID'
+        WHEN year BETWEEN 2022 AND 2024 THEN 'Post-COVID'
+    END as period,
+    COUNT(*) as rows,
+    SUM(passengers) as total_passengers
+FROM group2.passengers_core
+WHERE passengers IS NOT NULL
+GROUP BY period
+ORDER BY period;
+
+
+SELECT COUNT(*) 
+FROM group2.passengers_master
+WHERE origin_country IN ('NL', 'FR')
+AND origin IS NULL
+AND destination IS NULL
+AND passengers IS NULL
+AND flights IS NULL;
+
+DELETE FROM group2.cargo_master
+WHERE origin_country IN ('NL', 'FR')
+AND origin IS NULL
+AND destination IS NULL
+AND cargo IS NULL
+AND flights IS NULL;
+
+SELECT count(distinct destination) FROM PASSENGERS_core;
+
+
+
+
