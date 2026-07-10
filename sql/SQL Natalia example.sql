@@ -326,6 +326,17 @@ AND flights IS NULL;
 
 SELECT count(distinct destination) FROM PASSENGERS_core;
 
+SELECT DISTINCT  destination_country, destination, region, subregion, origin
+FROM group2.cargo_master
+WHERE destination ILIKE '%Marcel%';
+--ORDER BY DESTINATION_COUNTRY ;
+
+DELETE from group2.passengers_master WHERE destination_country = 'UNKNOWN';
+
+SELECT * FROM group2.passengers_MASTER CM WHERE destination_country = 'UNKNOW' ;
+
+
+
 
 
 
