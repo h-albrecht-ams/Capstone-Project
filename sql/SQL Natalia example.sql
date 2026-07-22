@@ -335,6 +335,24 @@ DELETE from group2.passengers_master WHERE destination_country = 'UNKNOWN';
 
 SELECT * FROM group2.passengers_MASTER CM WHERE destination_country = 'UNKNOW' ;
 
+DROP VIEW group2.passengers_route_types;
+
+SELECT origin, destination, YEAR, MONTH, cargo
+FROM CARGO_MASTER CM 
+WHERE origin IN (  'FRANKFURT/MAIN airport',
+        'PARIS-CHARLES DE GAULLE airport',
+        'ADOLFO SUAREZ MADRID-BARAJAS airport',
+        'AMSTERDAM/SCHIPHOL airport')
+AND destination = 'BALE-MULHOUSE airport'
+AND cargo IS NOT null
+ORDER BY origin, YEAR, month;
+
+SELECT * FROM cargo_core WHERE cargo IS NULL;
+
+SELECT * FROM passengers_master WHERE DESTINATION_COUNTRY  = 'CR';
+
+
+
 
 
 
