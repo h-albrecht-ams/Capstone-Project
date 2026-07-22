@@ -1,101 +1,189 @@
 # Back in the Air — European Aviation Recovery After COVID-19
 
-An analysis of passenger and cargo traffic recovery at four major European hub airports following the COVID-19 pandemic, using official Eurostat data from 2017–2024.
+An end-to-end data analytics project exploring how passenger traffic, cargo transport, and flight operations recovered after the COVID-19 pandemic across four major European hub airports using official Eurostat data (2017–2024).
 
-## Overview
+---
 
-This project examines how European aviation recovered after the pandemic by comparing pre-COVID, COVID, and post-COVID traffic at four of the continent's busiest hubs:
+## Project Overview
 
-- **FRA** — Frankfurt Airport
+The COVID-19 pandemic caused an unprecedented disruption to global aviation. While passenger traffic collapsed almost overnight, cargo operations proved considerably more resilient and played a critical role in maintaining global supply chains.
+
+This project investigates how both passenger and cargo traffic recovered between 2017 and 2024 at four of Europe's busiest hub airports:
+
 - **AMS** — Amsterdam Schiphol
 - **CDG** — Paris Charles de Gaulle
-- **MAD** — Madrid Barajas
+- **FRA** — Frankfurt Airport
+- **MAD** — Adolfo Suárez Madrid-Barajas
 
-The analysis quantifies the scale of the collapse, tests whether recovery is statistically significant, and classifies individual routes by how they fared through the disruption.
+Using statistical analysis and interactive Tableau dashboards, we compare pre-pandemic, pandemic, and recovery periods to identify long-term changes in aviation demand and network structures.
 
-## Key Questions
+---
 
-The project tests four hypotheses using Mann-Whitney U tests, comparing traffic distributions across periods to determine whether observed differences in recovery are statistically significant rather than due to chance.
+## Research Questions
 
-Routes are also classified into four categories:
+The project investigates four hypotheses:
 
-- **Survivors** — routes active both before and after COVID
-- **Lost** — routes that existed before COVID but did not return
-- **New** — routes that appeared only after the pandemic
-- **COVID-only** — routes that operated exclusively during the COVID period
+### H1 — COVID Impact
 
-## Data Source
+Did passenger and cargo traffic decrease by more than 50% during the first pandemic year?
 
-Data comes from [Eurostat](https://ec.europa.eu/eurostat), the statistical office of the European Union, covering 2017–2024. The analysis uses the **passengers carried** metric at the route (origin–destination) level. This metric was chosen deliberately to avoid double-counting connecting travelers, given the route-level structure of the dataset.
+### H2 — Recovery
 
-## Pipeline
+Did Amsterdam recover more slowly than the other hub airports?
 
-The analytical work is done entirely in Python/pandas. PostgreSQL serves purely as the serving layer that connects the finished dataset to Tableau for visualization — it is not used for transformation or analysis. This makes the pipeline a classic **ETL** flow, with all Transform work upstream of the load.
+### H3 — Transport Efficiency
+
+Did transport efficiency (passengers or cargo per flight) recover after COVID?
+
+### H4 — Network Changes
+
+Did post-pandemic aviation networks shift toward new destinations and regions, particularly in cargo transport?
+
+---
+
+## Route Classification
+
+To better understand structural changes in the aviation network, routes were classified into four categories:
+
+- **Survivors** — Active before and after COVID
+- **Lost** — Active before COVID but discontinued afterwards
+- **New** — Introduced after COVID
+- **COVID-only** — Operated exclusively during the pandemic
+
+---
+
+## Data Sources
+
+The project uses official aviation datasets published by **Eurostat**, covering the years **2017–2024**.
+
+The analysis combines:
+
+- Passenger traffic
+- Cargo traffic
+- Flight movements
+
+at the route (origin–destination) level.
+
+---
+
+## Data Pipeline
+
+The project follows a Python-based analytics workflow:
 
 ```
-Eurostat (Excel)  →  pandas  →  cleaning + analysis + hypothesis testing  →  PostgreSQL  →  Tableau
+Eurostat
+      ↓
+Python (pandas)
+      ↓
+Data Cleaning & Statistical Analysis
+      ↓
+PostgreSQL
+      ↓
+Tableau Dashboards
 ```
 
-**Steps:**
+### Workflow
 
-1. **Extract** — Download traffic data from Eurostat as Excel files.
-2. **Import** — Load the Excel files into pandas.
-3. **Clean** — Handle nulls, correct data types, and standardize airport/route codes in Python.
-4. **Analyse** — Run the full analysis in pandas: exploratory analysis, route classification (Survivors / Lost / New / COVID-only), and the four Mann-Whitney U hypothesis tests.
-5. **Load** — Write the finished, analysis-ready tables to PostgreSQL via SQLAlchemy.
-6. **Connect** — Establish the PostgreSQL → Tableau connection.
-7. **Visualise** — Build the dashboards and final visualizations in Tableau.
+1. Extract official Eurostat datasets.
+2. Clean and prepare the raw data using pandas.
+3. Perform exploratory data analysis.
+4. Conduct statistical hypothesis testing.
+5. Load processed datasets into PostgreSQL.
+6. Build interactive Tableau dashboards for visual analysis and presentation.
 
-## Tech Stack
+---
 
-- **Python** (pandas) — extraction, cleaning, analysis, and statistical testing
-- **SQLAlchemy** — loading the processed data into PostgreSQL
-- **PostgreSQL** — serving layer for visualization
-- **Tableau** — dashboards and final visualizations
+## Technologies
+
+- Python
+- pandas
+- NumPy
+- SciPy
+- SQLAlchemy
+- PostgreSQL
+- Tableau
+
+---
+
+## Tableau Dashboards
+
+The final results are presented through interactive Tableau dashboards including:
+
+- Executive Overview
+- Cargo Geography Analysis
+- Recovery Analysis
+- Cargo per Flight Analysis
+- Passenger Traffic per Airport Analysis
+- Growth by Region Analysis
+- Final Conclusions
+
+---
+
+## Key Findings
+
+Some of the main findings include:
+
+- Passenger traffic experienced a significantly stronger decline than cargo traffic during COVID-19.
+- Cargo operations proved considerably more resilient throughout the pandemic.
+- Recovery patterns differed substantially across the four hub airports.
+- Madrid showed the strongest recovery in several cargo-related indicators.
+- Cargo route networks changed after COVID, with evidence of new long-haul connections.
+- Passenger recovery followed a different trajectory than cargo recovery, highlighting the importance of analysing both markets separately.
+
+---
 
 ## Repository Structure
 
 ```
 .
-├── data/            # Raw Eurostat Excel files
-├── notebooks/       # pandas cleaning, analysis, and hypothesis testing
-├── src/             # Reusable Python scripts / helpers
-├── sql/             # Schema / load scripts for PostgreSQL
-├── tableau/         # Tableau workbook(s)
+├── data/                  # Raw Eurostat datasets
+├── notebooks/             # Data cleaning, EDA and statistical analysis
+├── src/                   # Reusable Python functions
+├── sql/                   # Database scripts
+├── tableau/               # Tableau workbooks and dashboards
+├── presentation/          # Final presentation
 └── README.md
 ```
-*(Adjust to match your actual layout.)*
+
+---
 
 ## Getting Started
 
-### Prerequisites
+### Requirements
 
 - Python 3.x
 - PostgreSQL
 - Tableau Desktop
 
-### Setup
+### Installation
 
 ```bash
-# Clone the repository
-git clone <your-repo-url>
-cd <repo-name>
+git clone <repository-url>
+cd <repository>
 
-# Install dependencies
 pip install -r requirements.txt
 ```
 
-Configure your PostgreSQL connection (e.g. via environment variables or a config file) before running the load step.
+Configure your PostgreSQL connection before loading the processed data into the database.
 
-## Results
+---
 
-*(Summarize your headline findings here — e.g. how far each hub recovered relative to 2019 baseline, which hypotheses were confirmed, and how many routes fell into each category.)*
-
-## Author
+## Authors
 
 **Natalia Ströher**
-Capstone project — Data Analytics
+
+**Hendrik Albrecht**
+
+Capstone Project – Data Analytics Bootcamp
+
+---
+
+## Acknowledgements
+
+Data provided by **Eurostat**, the statistical office of the European Union.
+
+---
 
 ## License
 
-*(Add a license if you intend to share this publicly, e.g. MIT.)*
+This project was developed as part of a Data Analytics Bootcamp Capstone Project.
