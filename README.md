@@ -157,17 +157,18 @@ Top 10 Destinations from 2017 - 2024.
 
 ---
 
-### Dashboard 2 — RECOVERY 
+### Dashboard 2 — Recovery 
 *Owner: Hendrik Albrecht*
 
-Tracks cargo per flight across the four hubs from 2017 to 2024. After a sharp decline in 2020, the overall average recovered steadily but remained below its pre-COVID level in 2024. AMS, CDG, and FRA had not fully recovered, while MAD was the only airport to exceed its 2019 level.
+Compares each airport’s 2022 cargo volume with its 2017–2019 baseline and tracks annual cargo volumes from 2017 to 2024. MAD was the only airport above its baseline in 2022, while CDG showed the lowest recovery index.
 
 **Technical highlights:**
-- Cargo per flight calculated as total cargo divided by total flights.
+- Recovery index calculated against each airport’s 2017–2019 average.
+- Reference line at 100% marks full recovery.
+- Combined recovery comparison and annual trend in one dashboard.
 - COVID period highlighted with a reference band.
-- Combined trend and airport-level comparison in one dashboard.
 
-![Dashboard 2 — Cargo per Flight Trend](images/cargo_efficiency_analysis.png)
+![Dashboard 2 — Cargo Recovery](images/recovery_analysis.png)
 
 ### Dashboard 3 — Cargo per Flight (Efficiency)
 *Owner: Hendrik Albrecht*
