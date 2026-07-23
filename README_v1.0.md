@@ -195,7 +195,7 @@ Below the line chart, a bar chart breaks down passenger volumes by period (Pre-C
 - Parameter-driven baseline toggle (own avg vs. across-hubs avg)
 - Click-to-highlight interaction on the airport legend
 
-![Dashboard 4 — Passenger Traffic per Airport](images/PassengersTrafficPerAirport.png)
+![Dashboard 4 — Passenger Traffic per Airport](images/PassengerTrafficPerAirport.png)
 
 ---
 
