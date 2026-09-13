@@ -48,7 +48,7 @@ Gulf carriers expanded aggressively during the recovery. We tested whether that 
 ## Key Results
 
 ### H1 — Recovery Speed: ❌ Rejected
-Frankfurt (FRA), not Amsterdam, was the slowest to recover. By 2022, FRA had reached only 75% of its pre-COVID passenger levels — the lowest of all four hubs — held back by its heavy dependence on business travel, which recovered far more slowly than leisure. Madrid (MAD) led the recovery at 92%, driven by Spain's tourism rebound. By 2024, MAD was the only airport to exceed its own pre-COVID baseline, finishing +4% above its historical average.
+For passenger traffic, Frankfurt (FRA), not Amsterdam, was the slowest to recover. By 2022, FRA had reached only 75% of its pre-COVID passenger levels — the lowest of all four hubs — held back by its heavy dependence on business travel, which recovered far more slowly than leisure. Madrid (MAD) led the recovery at 92%, driven by Spain's tourism rebound. By 2024, MAD was the only airport to exceed its own pre-COVID baseline, finishing +4% above its historical average.
 
 For cargo, H1 is also rejected: recovery patterns differed across airports but did not confirm AMS as the slowest.
 Paris (CDG) exhibited the slowest recovery by 2022, reaching a recovery index of 87.3%, followed closely by Amsterdam (AMS) at 88.7%. Frankfurt (FRA) recovered to 96.6% of its pre-COVID baseline, while Madrid (MAD) exceeded its baseline with a recovery index of 108.2%.
@@ -109,7 +109,7 @@ Frankfurt's slower recovery is not a coincidence — it is a structural story. F
 The efficiency story is perhaps the most surprising finding of the project. We expected efficiency to recover — what we did not expect was for it to structurally exceed pre-COVID levels. Airlines emerged from the pandemic leaner: unprofitable routes were cut, schedules were consolidated around high-demand destinations, and load factors improved as a result. This is visible in the data — by 2023, all four hubs were operating above their pre-COVID passengers-per-flight baseline, with Madrid again leading at +14%.
 
 ![Average Cargo per Flight by Analysis Period](images/mean_cargo_period.png)
-![Passengers Efficiency per Airport](images/PassengersEfficiencyPerAirport)
+![Passengers Efficiency per Airport](images/PassengersEfficiencyPerAirport.png)
 
 ### H3 — Two pandemics in one: passengers vs cargo
 The 71.5% passenger collapse and the roughly 25% cargo decline are not just different numbers — they reflect two fundamentally different market dynamics playing out simultaneously. Passenger travel stopped because governments closed borders and people stopped flying. Cargo continued because supply chains could not stop: medical equipment, PPE, e-commerce volumes, and perishable goods still needed to move. In some periods, cargo was actually loaded onto passenger aircraft with seats removed — a practice that became widespread in 2020. This divergence is one of the clearest illustrations of why analysing passenger and cargo traffic separately gives a far more complete picture of what COVID actually did to aviation.
@@ -126,7 +126,7 @@ The expansion of Gulf carriers — Emirates, Qatar Airways, Etihad — during th
 
 ## Data Sources
 
-All data comes from **Eurostat**, the statistical office of the European Union, covering 2017–2024 (on a monthly bases per year and route) for each of the 4 hubs, and for both metrics (Cargo/Passengers). 
+All data comes from **Eurostat**, the statistical office of the European Union, covering 2017–2024 (on a monthly basis per year and route) for each of the four hubs, and for both metrics (Cargo/Passengers). 
 The passengers analysis uses the **passengers carried** metric at the route (origin–destination) level. This metric was chosen deliberately to avoid double-counting connecting travellers, given the route-level structure of the dataset.
 
 Datasets used:
@@ -243,7 +243,7 @@ A summary slide presenting the hypothesis results side by side for passengers an
 ```
 .
 ├── data/              # Raw Eurostat datasets
-├── images/            # Images used in the ReadMe file
+├── images/            # Images used in the README file
 ├── presentation/      # Final presentation slides
 ├── python/            # Cleaning, EDA and statistical analysis notebooks
 ├── tableau/           # Tableau workbooks and dashboards
